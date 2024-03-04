@@ -141,7 +141,7 @@ Acount alias -> Alias for account ID
 * Great for offload
 * Input and or output to Many AWS products
 
-# Cloundformation
+# Cloudformation
 
 * Takes a template and spins up infrastructure
 
