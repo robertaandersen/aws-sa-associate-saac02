@@ -18,7 +18,8 @@
 * Users sharing similar attributes or related use cases
 
 ### Roles
-* Can be used by AWS Services or for granting external access to accounts, * E.g. EC2 instances can be put in a role which has access to S3
+* Can be used by AWS Services or for granting external access to accounts
+  * E.g. EC2 instances can be put in a role which has access to S3
 * Think - Use when the number of entities are not known
 
 ### Policies
