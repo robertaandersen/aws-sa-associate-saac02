@@ -113,6 +113,11 @@ Acount alias -> Alias for account ID
       * Explicit: Specific AWS accounts allowed access
     * Root Volume
     * Block Device Mapping (Links volumes to OS)
+    * Stored in AMI
+      * Boot volume
+      * Data volumes
+      * AMI Permissions
+      * Block Device Mapping
 * Connectivity
   * WIN - RDS: 3389
   * Linux - SSH: 22
@@ -176,3 +181,40 @@ Outputs
 * Resources the only mandatory part
 
 
+# Cloudwatch
+* 3 main jobs
+  * Collects operational data
+    * Metrics - for AWS products, apps or ON prem.
+      * Metrics are handled automatically or via CloudWatch agent
+    * Logs - AWS products, apps or ON prem
+      * All sorts of logs can be injested
+      * Custom logs need cloudwatch agent
+    * Events - AWS Services & Schedules
+      * If a service does something (e.g. EC2 start/stop)
+* Uses namespaces
+  * E.g. AWS/EC2 namespace for all EC2 events
+  * Namespaces can be created customly
+* Metrics grouped under a namespace
+* Dimensions
+  * Seperate datapoints for different things or perspectives within same metric (e.g. instance ID )
+* Alarms
+  * Action based on a metric
+
+# High Availability / Fault Tolerance / Disaster Recovery
+* High availability
+  * Aims to ensure an agreed level of operational performance (e.g. uptime)
+  * Often uses automation or redundancies to bring stuff back into service
+  * I other words: Maximize online time
+  * Outage -> Service is out in a way which impacts users
+* Fault Tolerance
+  * Enables a system to continue operationg properly in the event of tailuer of some of its component
+  * More than high availability
+  * Things can run even with something not working
+  * Work through failure of individual components
+  * E.g. using backup services AND components (think a plane v.s. car - redundandcies v.s. spare parts)
+* Disaster recovery
+  * Enable a set of policies, tools and procedures to enable the recovery or continuation of vital technology infrastructure and systems following a natural or a human-induced disaster
+  * E.g. Planning the day after
+  * Take backups
+*
+*
