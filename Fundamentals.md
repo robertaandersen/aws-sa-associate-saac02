@@ -113,7 +113,7 @@ Acount alias -> Alias for account ID
       * Explicit: Specific AWS accounts allowed access
     * Root Volume
     * Block Device Mapping (Links volumes to OS)
-    * Stored in AMI
+     * Stored in AMI
       * Boot volume
       * Data volumes
       * AMI Permissions
@@ -216,5 +216,54 @@ Outputs
   * Enable a set of policies, tools and procedures to enable the recovery or continuation of vital technology infrastructure and systems following a natural or a human-induced disaster
   * E.g. Planning the day after
   * Take backups
+
+# Route 53
+* Register domains and host Zones or managed nameservers
+* Global Service .. single DB
+* Globally resilient
+* IANA manages root zones for DNS
+* Registries manage individual zones (.com, .net etc)
+* When a domain is registered
+  * Route53 checks with registry if domain is available
+  * Creates a zone file (DB with all DNS information for domain)
+  * Allocates name services for zone (generally 4 for each zone - hosted zone)
+  * Puts zone file on each managed name service
+  * Communicates with the registry, adding name server records to the zone file for the top level domain (.org) using name server records
+  * Thus it indicates that the name servers are authorative for that domain
 *
-*
+
+## Zones inside R53
+* DNS zones aswell as hosting for those sones (DNS as a service)
+* Let's you create and manage Zone files called hosted zones which are hosted on AWS managed nameservers
+* Hosted zones are public (accible from internet)
+* Private (linked to VPC and only accesible from taht vpc)
+* Hosted zone hosts DNS records (record sets)
+
+# DNS Record types
+
+* Nameserver Records
+  * Allow delegation to occur in DNS
+  * E.g.
+    * .com has multiple NS records for amazon.com
+    * There records delegate traffic to th AZ name servers
+    * Inside those AWS zones are DNS records (www) which how you acces those records as part of DNS and the other way around (.com zone has records and nameservers)
+* A and AAAA Records
+  * Map host names to IP address
+  * Different is the type of IP address
+  * For a given host (e.g. WWW) an A record maps to IPv4 AAAA to IPv6
+  * Normally create two records with same name A and AAAA record
+  * Name server then picks appropriate rocord
+* CNAME records (cannonical name)
+  * Host to Host record (shortcut)
+  * Point to A records which represent ip Address
+* MX records
+  * Used for email
+  * A record called "mail" points to IP address
+  * MX records have two parts: priority and value
+  * E.g. if the a record has the value "mail" inside the same zone it points to the A record "mail" wheras a record with value "mail.other.domain" will point to another zone
+* TXT record
+  * Adds arbitrary information to a domain
+  * E.g. to proof ownership
+
+## TTL - Time To Live
+E.g. a client which has received an A record from a server has to jump through some hoops which take time. It received a so called Authorotative answer - bona fide name server. TTL tells the client how long it can cache the result. An answer which is received from what ever part of the chain cached is called a non authoratative answer.
